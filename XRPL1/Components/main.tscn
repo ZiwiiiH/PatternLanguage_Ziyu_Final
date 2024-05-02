@@ -1,0 +1,52 @@
+[gd_scene load_steps=11 format=3 uid="uid://4sfk4gv6lmtm"]
+
+[ext_resource type="Script" path="res://Components/Main.gd" id="1_2fkat"]
+[ext_resource type="PackedScene" uid="uid://cf1314vkwgdby" path="res://Components/xr_basics.tscn" id="2_jkxvt"]
+[ext_resource type="PackedScene" uid="uid://f7p3soo2fm1p" path="res://Model/House2.glb" id="3_25j4h"]
+[ext_resource type="AudioStream" uid="uid://bxqowqx5wovqd" path="res://Autio/GhibliNausicaä.mp3" id="4_hy5o0"]
+[ext_resource type="PackedScene" uid="uid://dm5heg3sohhir" path="res://Components/bubble.tscn" id="5_4vqee"]
+[ext_resource type="PackedScene" uid="uid://ev4icctcfkgy" path="res://Components/bubble2.tscn" id="6_7hylp"]
+[ext_resource type="Texture2D" uid="uid://b3mxd38hmvod1" path="res://Model/Render/2.png" id="7_1dhj1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hsklc"]
+sky_top_color = Color(0.384314, 0.454902, 0.54902, 1)
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_1yakq"]
+sky_material = SubResource("ProceduralSkyMaterial_hsklc")
+
+[sub_resource type="Environment" id="Environment_fm7e2"]
+background_mode = 1
+background_color = Color(0.164706, 0.419608, 0.427451, 0)
+sky = SubResource("Sky_1yakq")
+tonemap_mode = 2
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_2fkat")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fm7e2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="XROrigin3D" parent="." instance=ExtResource("2_jkxvt")]
+
+[node name="House2" parent="." instance=ExtResource("3_25j4h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180208, 0, 0.530489)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.55567, 1.61921, -4.61954)
+stream = ExtResource("4_hy5o0")
+
+[node name="Bubble2" parent="." instance=ExtResource("5_4vqee")]
+transform = Transform3D(1, 0, 0, 0, -0.611527, 0.791224, 0, -0.791224, -0.611527, 3.44002, 1.94152, -3.94759)
+
+[node name="Bubble3" parent="." instance=ExtResource("6_7hylp")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.478658, 1.57561, -0.849492)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.414811, 0, 0.279162, 0, 0.5, 0, -0.279162, 0, 0.414811, 1.23557, 3.21624, -7.26727)
+texture = ExtResource("7_1dhj1")
